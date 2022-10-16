@@ -23,9 +23,36 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+  let result = matrix.map(row => row.map(elem => elem = 0))
+
+  for(let i = 0; i < matrix.length; i++) {
+    for(let j = 0; j < matrix[i].length; j++ ) {
+      if(i !== 0 && matrix[i - 1][j] === true) result[i][j]++
+      if(i !== matrix.length - 1 && matrix[i + 1][j] === true) result[i][j]++
+      if(j !== 0 && matrix[i][j - 1] === true) result[i][j]++
+      if(j !== matrix[i].length - 1 && matrix[i][j + 1] === true) result[i][j]++
+
+      if(i !== 0 && j !== 0 && matrix[i - 1][j - 1] === true) result[i][j]++
+      if(i !== 0 && j !== matrix[i].length - 1 && matrix[i - 1][j + 1] === true) result[i][j]++
+      if(i !== matrix.length - 1 && j !== 0 && matrix[i + 1][j - 1] === true) result[i][j]++
+      if(i !== matrix.length - 1 && j !== matrix.length[i] - 1 && matrix[i + 1][j + 1] === true) result[i][j]++
+    }
+  }
+
+  return result
+  // return matrix.map((row, rowIndex) => {
+  //   row.map((elem, index) => {
+  //     if(matrix[rowIndex][index + 1] === true) count++
+  //     if(matrix[rowIndex][index - 1] === true) count++
+  //     if(rowIndex > 0 && rowIndex < matrix.length - 1) {
+  //       if(matrix[rowIndex - 1][index] === true) count++
+  //       if(matrix[rowIndex + 1][index] === true) count++
+  //     }
+  //     elem = count
+  //     count = 0
+  //   })
+  // })
 }
 
 module.exports = {
